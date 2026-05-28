@@ -9,9 +9,9 @@
   top:0;
   left:0;
   right:0;
-  height:55px;
+  height:250px;
   display:flex;
-  align-items:center;
+  align-items: flex-start;
   justify-content:space-between;
   padding:14px 24px;
   background: linear-gradient(135deg,var(--ofok-purple),var(--ofok-purple-2));
@@ -65,6 +65,13 @@
 .lang-menu button{ display:block; width:100%; padding:10px 12px; background:transparent; border:none; text-align:left; cursor:pointer; }
 .lang-menu button:hover{ background:#f6f6f8; }
 
+.books-dropdown{ position:relative; display:inline-block; margin-left:8px; transform: translateY(4px); }
+.books-toggle{ display:inline-flex; align-items:center; justify-content:center; gap:6px; background:transparent; color:var(--ofok-text); border:1px solid rgba(255,255,255,0.2); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
+.books-toggle svg{ width:20px; height:20px; }
+.books-menu{ position:absolute; right:0; top:calc(100% + 8px); background:#fff; color:#222; min-width:220px; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.18); overflow:hidden; z-index:1001; }
+.books-menu button{ display:block; width:100%; padding:10px 12px; background:transparent; border:none; text-align:left; cursor:pointer; }
+.books-menu button:hover{ background:#f6f6f8; }
+
 .cart-icon{ position:relative; display:inline-flex; align-items:center; justify-content:center; background:transparent; color:var(--ofok-text); margin-right:12px; text-decoration:none; padding:6px; border-radius:6px; transform: translateY(6px); }
 .cart-icon svg{ width:22px; height:22px; color:var(--ofok-text); }
 .cart-count{ position:absolute; top:-6px; right:-6px; background:var(--ofok-text); color:var(--ofok-purple-2); padding:2px 6px; border-radius:999px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.12); }
@@ -77,4 +84,5 @@
 
 @media (max-width:720px){
   .nav-links{ display:none; }
+  .books-menu{ min-width:180px; }
 }
