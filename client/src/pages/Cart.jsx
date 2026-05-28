@@ -6,7 +6,7 @@ export default function Cart() {
     <div>
       <h1>Votre panier</h1>
       <p>Nombre d'articles : {cart.length}</p>
-      <p>Total : {cartTotal.toFixed(2)} €</p>
+      <p>Total : {cartTotal.toFixed(2)} Da</p>
     </div>
   );
 }
