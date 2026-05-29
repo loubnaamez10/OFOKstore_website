@@ -209,3 +209,103 @@
   .stat__num { font-size: 20px; }
   .stat__label { font-size: 13px; }
 }
+
+.home-categories {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+  padding: 0 0 12px;
+}
+
+.home-categories__inner {
+  width: 100%;
+  max-width: 1100px;
+  padding: 14px 16px 0;
+}
+
+.home-categories__title {
+  margin: 0;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(28px, 2.6vw, 38px);
+  font-weight: 700;
+  color: #20376d;
+}
+
+.home-categories__grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.home-categories__grid--languages {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-categories__card {
+  min-height: 142px;
+  padding: 20px 16px 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(246, 247, 250, 0.98) 0%, rgba(235, 238, 244, 0.98) 100%);
+  border: 1px solid rgba(105, 127, 176, 0.12);
+  box-shadow: 0 12px 28px rgba(105, 127, 176, 0.1);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.home-categories__card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(105, 127, 176, 0.14);
+  border-color: rgba(105, 127, 176, 0.16);
+}
+
+.home-categories__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #6d86cf;
+  background: radial-gradient(circle at 35% 35%, rgba(109, 134, 207, 0.14) 0%, rgba(109, 134, 207, 0.06) 58%, rgba(255,255,255,0.7) 100%);
+}
+
+.home-categories__label {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  color: #2f3f66;
+}
+
+@media (max-width: 720px) {
+  .home-categories__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-categories__grid--languages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-categories__title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-categories__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-categories__grid--languages {
+    grid-template-columns: 1fr;
+  }
+}
