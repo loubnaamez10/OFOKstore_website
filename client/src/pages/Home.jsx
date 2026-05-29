@@ -2,7 +2,8 @@
 
 export default function Home() {
 	return (
-		<section className="home-hero" aria-labelledby="home-hero-title">
+			<>
+				<section className="home-hero" aria-labelledby="home-hero-title">
 			<div className="home-hero__content">
 				<div className="home-hero__copy">
 					<p className="home-hero__eyebrow">Delivery Available To 69 Provinces In Algeria 🇩🇿.</p>
@@ -13,6 +14,30 @@ export default function Home() {
 					</p>
 				</div>
 			</div>
-		</section>
+			</section>
+			{/* decorative image/banner under hero - replace src with your image path */}
+
+			{/* stats row */}
+			<section className="home-stats" aria-hidden>
+			<div className="home-stats__inner">
+				<div className="stat">
+					<div className="stat__num">+35K</div>
+					<div className="stat__label">Followers</div>
+				</div>
+				<div className="stat">
+					<div className="stat__num">+2000</div>
+					<div className="stat__label">Books</div>
+				</div>
+				<div className="stat">
+					<div className="stat__num">69</div>
+					<div className="stat__label">Provinces</div>
+				</div>
+				<div className="stat">
+					<div className="stat__num">24h</div>
+					<div className="stat__label">Delivery</div>
+				</div>
+			</div>
+			</section>
+		</>
 	);
 }
