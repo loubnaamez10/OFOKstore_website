@@ -38,6 +38,31 @@
   margin-top: 6px;
 }
 
+/* RTL support when section has dir="rtl" */
+.home-hero[dir="rtl"] .home-hero__copy {
+  text-align: right;
+}
+.home-hero[dir="rtl"] .home-hero__title-break,
+.home-hero[dir="rtl"] .home-hero__subtitle-break {
+  display: block;
+}
+
+/* Position copy on the right for Arabic: flip margins and alignment */
+.home-hero[dir="rtl"] .home-hero__content {
+  justify-content: flex-end;
+}
+.home-hero[dir="rtl"] .home-hero__copy {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+.home-stats[dir="rtl"] .stat:not(:last-child)::after {
+  right: auto;
+  left: -18px;
+}
+.home-stats[dir="rtl"] .home-stats__inner { direction: rtl; }
+
 @media (max-width: 620px) {
   .home-hero__subtitle-break {
     margin-top: 8px;
