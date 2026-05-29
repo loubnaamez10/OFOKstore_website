@@ -2,12 +2,6 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import { useLang } from "../context/LangContext";
 
-const LANGUAGE_CARDS = [
-  { key: "en", icon: "EN", label: "English" },
-  { key: "ar", icon: "AR", label: "Arabic" },
-  { key: "fr", icon: "FR", label: "French" },
-];
-
 const HERO_TEXT = {
   en: {
     eyebrow: "Delivery Available To 69 Provinces In Algeria 🇩🇿.",
@@ -72,11 +66,7 @@ export default function Home() {
 
   return (
     <>
-      <section
-        className="home-hero"
-        aria-labelledby="home-hero-title"
-        dir={lang === "ar" ? "rtl" : "ltr"}
-      >
+      <section className="home-hero" aria-labelledby="home-hero-title" dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="home-hero__content">
           <div className="home-hero__copy">
             <p className="home-hero__eyebrow">{t.eyebrow}</p>
@@ -91,9 +81,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* decorative image/banner under hero - replace src with your image path */}
-
-      {/* stats row */}
       <section className="home-stats" aria-hidden dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="home-stats__inner">
           {t.stats.map((s, i) => (
