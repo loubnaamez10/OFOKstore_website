@@ -1,9 +1,10 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useLang } from "../context/LangContext";
 import BookCard from "../components/BookCard";
-import { getLatestBooks } from "../services/books";
+import { getBestSellersBooks, getLatestBooks } from "../services/books";
 
 const SOCIAL_CONTACTS = {
   instagramLabel: "@ofokstore",
@@ -28,8 +29,8 @@ const TRUST_ITEMS = {
       {
         key: "returns",
         icon: "returns",
-        title: "Easy Returns",
-        subtitle: "7 days return policy",
+        title: "Fast Delivery",
+        subtitle: "Fast shipping across Algeria",
       },
       {
         key: "support",
@@ -54,8 +55,8 @@ const TRUST_ITEMS = {
       {
         key: "returns",
         icon: "returns",
-        title: "Retours faciles",
-        subtitle: "Politique de retour sous 7 jours",
+        title: "Livraison rapide",
+        subtitle: "Expédition rapide partout en Algérie",
       },
       {
         key: "support",
@@ -80,8 +81,8 @@ const TRUST_ITEMS = {
       {
         key: "returns",
         icon: "returns",
-        title: "إرجاع سهل",
-        subtitle: "سياسة إرجاع لمدة 7 يوماً",
+        title: "توصيل سريع",
+        subtitle: "شحن سريع في جميع أنحاء الجزائر",
       },
       {
         key: "support",
@@ -102,6 +103,9 @@ const HERO_TEXT = {
     languagesTitle: "Find books in your favorite language",
     newArrivalsTitle: "New Arrivals",
     newArrivalsSubtitle: "Freshly added books from our collection.",
+    bestSellersTitle: "Our Bestsellers",
+    bestSellersSubtitle: "The books our readers keep coming back for.",
+    bestSellersViewAll: "View all",
     viewAll: "View all",
     languageCards: [
       { key: "en", icon: "EN", label: "English" },
@@ -123,6 +127,9 @@ const HERO_TEXT = {
     languagesTitle: "Trouvez des livres dans votre langue préférée",
     newArrivalsTitle: "Nouveautés",
     newArrivalsSubtitle: "Les derniers livres ajoutés à notre collection.",
+    bestSellersTitle: "Nos meilleures ventes",
+    bestSellersSubtitle: "Les livres que nos lecteurs apprécient le plus.",
+    bestSellersViewAll: "Voir tout",
     viewAll: "Voir tout",
     languageCards: [
       { key: "en", icon: "EN", label: "Anglais" },
@@ -145,6 +152,9 @@ const HERO_TEXT = {
     languagesTitle: "ابحث عن كتب بلغتك المفضلة",
     newArrivalsTitle: "وصل حديثاً",
     newArrivalsSubtitle: "أحدث الكتب المضافة إلى مجموعتنا.",
+    bestSellersTitle: "الأكثر مبيعًا",
+    bestSellersSubtitle: "الكتب التي يعود إليها قراؤنا باستمرار.",
+    bestSellersViewAll: "عرض الكل",
     viewAll: "عرض الكل",
     languageCards: [
       { key: "en", icon: "EN", label: "الإنجليزية" },
@@ -162,9 +172,11 @@ const HERO_TEXT = {
 
 export default function Home() {
   const { lang } = useLang();
+  const location = useLocation();
   const t = HERO_TEXT[lang] || HERO_TEXT.en;
   const trust = TRUST_ITEMS[lang] || TRUST_ITEMS.en;
   const [latestBooks, setLatestBooks] = useState([]);
+  const [bestSellerBooks, setBestSellerBooks] = useState([]);
 
   useEffect(() => {
     let active = true;
@@ -180,9 +192,35 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+
+    const target = document.querySelector(location.hash);
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [location.hash]);
+
+  useEffect(() => {
+    let active = true;
+
+    getBestSellersBooks(6).then((books) => {
+      if (active) {
+        setBestSellerBooks(books);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <>
-      <section className="home-hero" aria-labelledby="home-hero-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+      <section id="home-top" className="home-hero" aria-labelledby="home-hero-title" dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="home-hero__content">
           <div className="home-hero__copy">
             <p className="home-hero__eyebrow">{t.eyebrow}</p>
@@ -231,7 +269,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-new-arrivals" aria-labelledby="home-new-arrivals-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+      <section id="home-new-arrivals" className="home-new-arrivals" aria-labelledby="home-new-arrivals-title" dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="home-new-arrivals__inner">
           <div className="home-new-arrivals__header">
             <div className="home-new-arrivals__copy">
@@ -258,7 +296,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-trust" aria-labelledby="home-trust-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+      <section id="home-bestsellers" className="home-bestsellers" aria-labelledby="home-bestsellers-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+        <div className="home-bestsellers__inner">
+          <div className="home-bestsellers__header">
+            <div className="home-bestsellers__copy">
+              <h2 id="home-bestsellers-title" className="home-bestsellers__title">
+                {t.bestSellersTitle}
+              </h2>
+              <p className="home-bestsellers__subtitle">{t.bestSellersSubtitle}</p>
+            </div>
+
+            <Link className="home-bestsellers__view-all" to="/books">
+              {t.bestSellersViewAll}
+            </Link>
+          </div>
+
+          <div className="home-bestsellers__row" aria-label={t.bestSellersTitle}>
+            {bestSellerBooks.length > 0 ? (
+              bestSellerBooks.map((book) => <BookCard key={book.id} book={book} compact />)
+            ) : (
+              <div className="home-bestsellers__empty">
+                Add your books in the database and the bestsellers will appear here.
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section id="about-us" className="home-trust" aria-labelledby="home-trust-title" dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="home-trust__inner">
           <div className="home-trust__intro">
             <p className="home-trust__intro-title">{trust.intro}</p>
@@ -284,6 +349,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
     </>
   );
 }

@@ -31,3 +31,13 @@ export async function getLatestBooks(limit = 20) {
   const books = await readBooks(`/api/books?limit=${limit}&sort=addedAt:desc`);
   return books.slice(0, limit);
 }
+
+export async function getBestSellersBooks(limit = 20) {
+  const books = await readBooks(`/api/books?limit=${limit}&sort=soldCount:desc`);
+
+  if (books.length > 0) {
+    return books.slice(0, limit);
+  }
+
+  return getLatestBooks(limit);
+}

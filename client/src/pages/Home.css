@@ -266,6 +266,12 @@
   border-color: rgba(105, 127, 176, 0.16);
 }
 
+#home-new-arrivals,
+#home-bestsellers,
+#about-us {
+  scroll-margin-top: 96px;
+}
+
 .home-categories__icon {
   width: 64px;
   height: 64px;
@@ -286,7 +292,8 @@
   color: #2f3f66;
 }
 
-.home-new-arrivals {
+.home-new-arrivals,
+.home-bestsellers {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -294,13 +301,15 @@
   padding: 0 0 20px;
 }
 
-.home-new-arrivals__inner {
+.home-new-arrivals__inner,
+.home-bestsellers__inner {
   width: 100%;
   max-width: 1100px;
   padding: 16px 16px 0;
 }
 
-.home-new-arrivals__header {
+.home-new-arrivals__header,
+.home-bestsellers__header {
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -309,11 +318,13 @@
   text-align: left;
 }
 
-.home-new-arrivals[dir="rtl"] .home-new-arrivals__header {
+.home-new-arrivals[dir="rtl"] .home-new-arrivals__header,
+.home-bestsellers[dir="rtl"] .home-bestsellers__header {
   text-align: right;
 }
 
-.home-new-arrivals__title {
+.home-new-arrivals__title,
+.home-bestsellers__title {
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(28px, 2.6vw, 38px);
@@ -321,7 +332,8 @@
   color: #20376d;
 }
 
-.home-new-arrivals__subtitle {
+.home-new-arrivals__subtitle,
+.home-bestsellers__subtitle {
   margin: 8px 0 0;
   font-family: "Manrope", "Segoe UI", sans-serif;
   font-size: 14px;
@@ -329,7 +341,8 @@
   color: rgba(90, 111, 157, 0.82);
 }
 
-.home-new-arrivals__view-all {
+.home-new-arrivals__view-all,
+.home-bestsellers__view-all {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -352,38 +365,45 @@
     color 0.2s ease;
 }
 
-.home-new-arrivals__view-all::after {
+.home-new-arrivals__view-all::after,
+.home-bestsellers__view-all::after {
   content: "→";
   font-size: 16px;
   line-height: 1;
   transition: transform 0.2s ease;
 }
 
-.home-new-arrivals[dir="rtl"] .home-new-arrivals__view-all::after {
+.home-new-arrivals[dir="rtl"] .home-new-arrivals__view-all::after,
+.home-bestsellers[dir="rtl"] .home-bestsellers__view-all::after {
   content: "←";
 }
 
-.home-new-arrivals__view-all:hover {
+.home-new-arrivals__view-all:hover,
+.home-bestsellers__view-all:hover {
   transform: translateY(-1px);
   background: rgba(236, 241, 250, 0.8);
 }
 
-.home-new-arrivals__view-all:hover::after {
+.home-new-arrivals__view-all:hover::after,
+.home-bestsellers__view-all:hover::after {
   transform: translateX(2px);
 }
 
-.home-new-arrivals__view-all:focus-visible {
+.home-new-arrivals__view-all:focus-visible,
+.home-bestsellers__view-all:focus-visible {
   outline: 3px solid rgba(109, 134, 207, 0.28);
   outline-offset: 3px;
 }
 
-.home-new-arrivals__row {
+.home-new-arrivals__row,
+.home-bestsellers__row {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 16px;
 }
 
-.home-new-arrivals__empty {
+.home-new-arrivals__empty,
+.home-bestsellers__empty {
   grid-column: 1 / -1;
   min-height: 180px;
   display: grid;
