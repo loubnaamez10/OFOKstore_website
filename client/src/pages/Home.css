@@ -334,15 +334,47 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
+  gap: 10px;
+  min-height: 46px;
+  position: relative;
+  top: 20px;
+  padding: 0 18px;
+  border: 0;
   border-radius: 999px;
   text-decoration: none;
   font-family: "Manrope", "Segoe UI", sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, var(--ofok-purple-2) 0%, var(--ofok-purple) 100%);
-  box-shadow: 0 14px 26px rgba(105, 127, 176, 0.18);
+  color: #20376d;
+  background: transparent;
+  box-shadow: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease,
+    color 0.2s ease;
+}
+
+.home-new-arrivals__view-all::after {
+  content: "→";
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.home-new-arrivals[dir="rtl"] .home-new-arrivals__view-all::after {
+  content: "←";
+}
+
+.home-new-arrivals__view-all:hover {
+  transform: translateY(-1px);
+  background: rgba(236, 241, 250, 0.8);
+}
+
+.home-new-arrivals__view-all:hover::after {
+  transform: translateX(2px);
+}
+
+.home-new-arrivals__view-all:focus-visible {
+  outline: 3px solid rgba(109, 134, 207, 0.28);
+  outline-offset: 3px;
 }
 
 .home-new-arrivals__row {
