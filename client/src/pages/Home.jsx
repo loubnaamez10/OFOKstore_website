@@ -1,6 +1,9 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useLang } from "../context/LangContext";
+import BookCard from "../components/BookCard";
+import { getLatestBooks } from "../services/books";
 
 const HERO_TEXT = {
   en: {
@@ -9,6 +12,9 @@ const HERO_TEXT = {
     line1: "Your Algerian library is here!",
     line2: "Discover a wide collection of English, Arabic & French titles, knowledge for every journey.",
     languagesTitle: "Find books in your favorite language",
+    newArrivalsTitle: "New Arrivals",
+    newArrivalsSubtitle: "Freshly added books from our collection.",
+    viewAll: "View all",
     languageCards: [
       { key: "en", icon: "EN", label: "English" },
       { key: "ar", icon: "AR", label: "Arabic" },
@@ -27,6 +33,9 @@ const HERO_TEXT = {
     line1: "Votre bibliothèque algérienne est ici !",
     line2: "Découvrez une large collection de titres en anglais, arabe et français, des savoirs pour chaque voyage.",
     languagesTitle: "Trouvez des livres dans votre langue préférée",
+    newArrivalsTitle: "Nouveautés",
+    newArrivalsSubtitle: "Les derniers livres ajoutés à notre collection.",
+    viewAll: "Voir tout",
     languageCards: [
       { key: "en", icon: "EN", label: "Anglais" },
       { key: "ar", icon: "AR", label: "Arabe" },
@@ -46,6 +55,9 @@ const HERO_TEXT = {
     line1: "مكتبتك الجزائرية هنا!",
     line2: "اكتشف مجموعة واسعة من العناوين بالإنجليزية والعربية والفرنسية، المعرفة لكل رحلة.",
     languagesTitle: "ابحث عن كتب بلغتك المفضلة",
+    newArrivalsTitle: "وصل حديثاً",
+    newArrivalsSubtitle: "أحدث الكتب المضافة إلى مجموعتنا.",
+    viewAll: "عرض الكل",
     languageCards: [
       { key: "en", icon: "EN", label: "الإنجليزية" },
       { key: "ar", icon: "AR", label: "العربية" },
@@ -63,6 +75,21 @@ const HERO_TEXT = {
 export default function Home() {
   const { lang } = useLang();
   const t = HERO_TEXT[lang] || HERO_TEXT.en;
+  const [latestBooks, setLatestBooks] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+
+    getLatestBooks(6).then((books) => {
+      if (active) {
+        setLatestBooks(books);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <>
@@ -111,6 +138,33 @@ export default function Home() {
                 <span className="home-categories__label">{card.label}</span>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-new-arrivals" aria-labelledby="home-new-arrivals-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+        <div className="home-new-arrivals__inner">
+          <div className="home-new-arrivals__header">
+            <div className="home-new-arrivals__copy">
+              <h2 id="home-new-arrivals-title" className="home-new-arrivals__title">
+                {t.newArrivalsTitle}
+              </h2>
+              <p className="home-new-arrivals__subtitle">{t.newArrivalsSubtitle}</p>
+            </div>
+
+            <Link className="home-new-arrivals__view-all" to="/new-arrivals">
+              {t.viewAll}
+            </Link>
+          </div>
+
+          <div className="home-new-arrivals__row" aria-label={t.newArrivalsTitle}>
+            {latestBooks.length > 0 ? (
+              latestBooks.map((book) => <BookCard key={book.id} book={book} compact />)
+            ) : (
+              <div className="home-new-arrivals__empty">
+                Add your books in the database and they will appear here.
+              </div>
+            )}
           </div>
         </div>
       </section>

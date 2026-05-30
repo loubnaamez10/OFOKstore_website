@@ -2,6 +2,7 @@
 import App from "../App";
 import Home from "../pages/Home";
 import Books from "../pages/Books";
+import NewArrivals from "../pages/NewArrivals";
 import BookDetails from "../pages/BookDetails";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "books", element: <Books /> },
+      { path: "new-arrivals", element: <NewArrivals /> },
       { path: "books/:id", element: <BookDetails /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <Checkout /> },
