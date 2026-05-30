@@ -122,6 +122,28 @@
   background: #f6f6f8;
 }
 
+.contact-menu {
+  min-width: 180px;
+  padding: 4px;
+}
+
+.contact-menu__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 10px;
+}
+
+.contact-menu__label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.contact-menu__info {
+  font-size: 12px;
+  color: rgba(90, 111, 157, 0.85);
+}
+
 .navbar .brand{
   font-weight:800;
   font-size:20px;

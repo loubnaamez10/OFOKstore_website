@@ -12,10 +12,12 @@ export default function Navbar() {
   const location = useLocation();
   const [langOpen, setLangOpen] = useState(false);
   const [booksOpen, setBooksOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef(null);
   const booksRef = useRef(null);
+  const contactRef = useRef(null);
   const navigate = useNavigate();
 
   const navText = {
@@ -33,6 +35,44 @@ export default function Navbar() {
     ar: { english: "الإنجليزية", arabic: "العربية", french: "الفرنسية" },
   }[lang] || { english: "English", arabic: "Arabic", french: "French" };
 
+  const contactText = {
+    en: {
+      contact: "Contact",
+      instagram: "Instagram",
+      facebook: "Facebook",
+      whatsapp: "WhatsApp",
+      instagramInfo: "ofok.store",
+      facebookInfo: "Ofok Ofok",
+      whatsappInfo: "+213667822379",
+    },
+    fr: {
+      contact: "Contact",
+      instagram: "Instagram",
+      facebook: "Facebook",
+      whatsapp: "WhatsApp",
+      instagramInfo: "Instagram: ofok.store",
+      facebookInfo: "Page Facebook: Ofok Ofok",
+      whatsappInfo: "Numéro WhatsApp: +213667822379",
+    },
+    ar: {
+      contact: "اتصل بنا",
+      instagram: "إنستغرام",
+      facebook: "فيسبوك",
+      whatsapp: "واتساب",
+      instagramInfo: "إنستغرام: ofok.store",
+      facebookInfo: "صفحة فيسبوك: Ofok Ofok",
+      whatsappInfo: "رقم واتساب: \u200E+213667822379",
+    },
+  }[lang] || {
+    contact: "Contact",
+    instagram: "Instagram",
+    facebook: "Facebook",
+    whatsapp: "WhatsApp",
+    instagramInfo: "Instagram: ofok.store",
+    facebookInfo: "Facebook: Ofok Ofok",
+    whatsappInfo: "WhatsApp: +213667822379",
+  };
+
   function changeLang(code) {
     setLang(code);
     setLangOpen(false);
@@ -46,6 +86,9 @@ export default function Navbar() {
     function handlePointerDown(event) {
       if (booksRef.current && !booksRef.current.contains(event.target)) {
         setBooksOpen(false);
+      }
+      if (contactRef.current && !contactRef.current.contains(event.target)) {
+        setContactOpen(false);
       }
     }
 
@@ -117,6 +160,53 @@ export default function Navbar() {
         <Link className="nav-link" to="/#home-kids-books">
           {navText.kidsBooks}
         </Link>
+
+        <div className="books-dropdown contact-dropdown" ref={contactRef}>
+          <button
+            type="button"
+            className="nav-link nav-link--button books-toggle"
+            aria-haspopup="menu"
+            aria-expanded={contactOpen}
+            onClick={() => setContactOpen((open) => !open)}
+          >
+            {contactText.contact} <span aria-hidden="true" className="nav-link__chevron">▾</span>
+          </button>
+
+          {contactOpen && (
+            <div className="books-menu contact-menu" role="menu" aria-label={contactText.contact}>
+              <a
+                className="books-menu__item contact-menu__item"
+                role="menuitem"
+                href="https://www.instagram.com/ofokstore/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="contact-menu__label">{contactText.instagram}</span>
+                <span className="contact-menu__info">{contactText.instagramInfo}</span>
+              </a>
+              <a
+                className="books-menu__item contact-menu__item"
+                role="menuitem"
+                href="https://www.facebook.com/ofokstore"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="contact-menu__label">{contactText.facebook}</span>
+                <span className="contact-menu__info">{contactText.facebookInfo}</span>
+              </a>
+              <a
+                className="books-menu__item contact-menu__item"
+                role="menuitem"
+                href="https://wa.me/213000000000"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="contact-menu__label">{contactText.whatsapp}</span>
+                <span className="contact-menu__info">{contactText.whatsappInfo}</span>
+              </a>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="actions">
