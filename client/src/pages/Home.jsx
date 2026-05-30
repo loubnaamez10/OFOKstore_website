@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useLang } from "../context/LangContext";
 import BookCard from "../components/BookCard";
-import { getBestSellersBooks, getLatestBooks } from "../services/books";
+import { getBestSellersBooks, getKidsBooks, getLatestBooks, getSchoolSuppliesBooks } from "../services/books";
 
 const SOCIAL_CONTACTS = {
   instagramLabel: "@ofokstore",
@@ -106,6 +106,12 @@ const HERO_TEXT = {
     bestSellersTitle: "Our Bestsellers",
     bestSellersSubtitle: "The books our readers keep coming back for.",
     bestSellersViewAll: "View all",
+    schoolSuppliesTitle: "School Supplies",
+    schoolSuppliesSubtitle: "Essential picks for study, notes, and organization.",
+    schoolSuppliesViewAll: "View all",
+    kidsBooksTitle: "Kids' Books",
+    kidsBooksSubtitle: "Fun, friendly reads for young readers.",
+    kidsBooksViewAll: "View all",
     viewAll: "View all",
     languageCards: [
       { key: "en", icon: "EN", label: "English" },
@@ -130,6 +136,12 @@ const HERO_TEXT = {
     bestSellersTitle: "Nos meilleures ventes",
     bestSellersSubtitle: "Les livres que nos lecteurs apprécient le plus.",
     bestSellersViewAll: "Voir tout",
+    schoolSuppliesTitle: "Fournitures scolaires",
+    schoolSuppliesSubtitle: "L’essentiel pour étudier, prendre des notes et s’organiser.",
+    schoolSuppliesViewAll: "Voir tout",
+    kidsBooksTitle: "Livres pour enfants",
+    kidsBooksSubtitle: "Des lectures amusantes et adaptées aux jeunes lecteurs.",
+    kidsBooksViewAll: "Voir tout",
     viewAll: "Voir tout",
     languageCards: [
       { key: "en", icon: "EN", label: "Anglais" },
@@ -150,11 +162,17 @@ const HERO_TEXT = {
     line1: "مكتبتك الجزائرية هنا!",
     line2: "اكتشف مجموعة واسعة من العناوين بالإنجليزية والعربية والفرنسية، المعرفة لكل رحلة.",
     languagesTitle: "ابحث عن كتب بلغتك المفضلة",
-    newArrivalsTitle: "وصل حديثاً",
+    newArrivalsTitle: "أحدث المنتجات",
     newArrivalsSubtitle: "أحدث الكتب المضافة إلى مجموعتنا.",
     bestSellersTitle: "الأكثر مبيعًا",
     bestSellersSubtitle: "الكتب التي يعود إليها قراؤنا باستمرار.",
     bestSellersViewAll: "عرض الكل",
+    schoolSuppliesTitle: "اللوازم المدرسية",
+    schoolSuppliesSubtitle: "اختيارات أساسية للدراسة والملاحظات والتنظيم.",
+    schoolSuppliesViewAll: "عرض الكل",
+    kidsBooksTitle: "كتب الأطفال",
+    kidsBooksSubtitle: "قراءات ممتعة ومناسبة للقراء الصغار.",
+    kidsBooksViewAll: "عرض الكل",
     viewAll: "عرض الكل",
     languageCards: [
       { key: "en", icon: "EN", label: "الإنجليزية" },
@@ -177,6 +195,8 @@ export default function Home() {
   const trust = TRUST_ITEMS[lang] || TRUST_ITEMS.en;
   const [latestBooks, setLatestBooks] = useState([]);
   const [bestSellerBooks, setBestSellerBooks] = useState([]);
+  const [schoolSupplyBooks, setSchoolSupplyBooks] = useState([]);
+  const [kidsBooks, setKidsBooks] = useState([]);
 
   useEffect(() => {
     let active = true;
@@ -210,6 +230,34 @@ export default function Home() {
     getBestSellersBooks(6).then((books) => {
       if (active) {
         setBestSellerBooks(books);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    getSchoolSuppliesBooks(6).then((books) => {
+      if (active) {
+        setSchoolSupplyBooks(books);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    getKidsBooks(6).then((books) => {
+      if (active) {
+        setKidsBooks(books);
       }
     });
 
@@ -317,6 +365,60 @@ export default function Home() {
             ) : (
               <div className="home-bestsellers__empty">
                 Add your books in the database and the bestsellers will appear here.
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section id="home-school-supplies" className="home-school-supplies" aria-labelledby="home-school-supplies-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+        <div className="home-school-supplies__inner">
+          <div className="home-school-supplies__header">
+            <div className="home-school-supplies__copy">
+              <h2 id="home-school-supplies-title" className="home-school-supplies__title">
+                {t.schoolSuppliesTitle}
+              </h2>
+              <p className="home-school-supplies__subtitle">{t.schoolSuppliesSubtitle}</p>
+            </div>
+
+            <Link className="home-school-supplies__view-all" to="/books?category=school-supplies">
+              {t.schoolSuppliesViewAll}
+            </Link>
+          </div>
+
+          <div className="home-school-supplies__row" aria-label={t.schoolSuppliesTitle}>
+            {schoolSupplyBooks.length > 0 ? (
+              schoolSupplyBooks.map((book) => <BookCard key={book.id} book={book} compact />)
+            ) : (
+              <div className="home-school-supplies__empty">
+                Add your school supplies books in the database and they will appear here.
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section id="home-kids-books" className="home-kids-books" aria-labelledby="home-kids-books-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+        <div className="home-kids-books__inner">
+          <div className="home-kids-books__header">
+            <div className="home-kids-books__copy">
+              <h2 id="home-kids-books-title" className="home-kids-books__title">
+                {t.kidsBooksTitle}
+              </h2>
+              <p className="home-kids-books__subtitle">{t.kidsBooksSubtitle}</p>
+            </div>
+
+            <Link className="home-kids-books__view-all" to="/books?category=children">
+              {t.kidsBooksViewAll}
+            </Link>
+          </div>
+
+          <div className="home-kids-books__row" aria-label={t.kidsBooksTitle}>
+            {kidsBooks.length > 0 ? (
+              kidsBooks.map((book) => <BookCard key={book.id} book={book} compact />)
+            ) : (
+              <div className="home-kids-books__empty">
+                Add your children’s books in the database and they will appear here.
               </div>
             )}
           </div>

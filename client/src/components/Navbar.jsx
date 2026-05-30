@@ -18,8 +18,10 @@ export default function Navbar() {
 
   const navText = {
     home: lang === "fr" ? "Accueil" : lang === "ar" ? "الرئيسية" : "Home",
-    newArrivals: lang === "fr" ? "Nouveautés" : lang === "ar" ? "وصل حديثاً" : "New Arrivals",
+    newArrivals: lang === "fr" ? "Nouveautés" : lang === "ar" ? "أحدث المنتجات" : "New Arrivals",
     bestsellers: lang === "fr" ? "Nos meilleures ventes" : lang === "ar" ? "الأكثر مبيعًا" : "Our Bestsellers",
+    schoolSupplies: lang === "fr" ? "Fournitures scolaires" : lang === "ar" ? "اللوازم المدرسية" : "School Supplies",
+    kidsBooks: lang === "fr" ? "Livres pour enfants" : lang === "ar" ? "كتب الأطفال" : "Kids' Books",
   };
 
   function changeLang(code) {
@@ -48,8 +50,12 @@ export default function Navbar() {
         <span className="brand-text">OFOK</span>
       </div>
 
-      <div className="nav-links" aria-label="Primary navigation">
-        <Link className={location.pathname === "/" ? "nav-link nav-link--active" : "nav-link"} to="/">
+      <div
+        className="nav-links"
+        aria-label="Primary navigation"
+        dir={lang === "ar" ? "rtl" : "ltr"}
+      >
+        <Link className={location.pathname === "/" ? "nav-link nav-link--active" : "nav-link"} to="/#home-top">
           {navText.home}
         </Link>
 
@@ -58,6 +64,12 @@ export default function Navbar() {
         </Link>
         <Link className="nav-link" to="/#home-bestsellers">
           {navText.bestsellers}
+        </Link>
+        <Link className="nav-link" to="/#home-school-supplies">
+          {navText.schoolSupplies}
+        </Link>
+        <Link className="nav-link" to="/#home-kids-books">
+          {navText.kidsBooks}
         </Link>
       </div>
 

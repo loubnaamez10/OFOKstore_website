@@ -11,6 +11,7 @@ const CATEGORY_TITLES = {
   children: "Children's Books",
   "self-development": "Self Development",
   history: "History & Biography",
+  "school-supplies": "School Supplies",
 };
 
 export default function Books() {

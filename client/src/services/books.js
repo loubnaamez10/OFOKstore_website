@@ -41,3 +41,23 @@ export async function getBestSellersBooks(limit = 20) {
 
   return getLatestBooks(limit);
 }
+
+export async function getSchoolSuppliesBooks(limit = 20) {
+  const books = await readBooks(`/api/books?limit=${limit}&category=school-supplies&sort=soldCount:desc`);
+
+  if (books.length > 0) {
+    return books.slice(0, limit);
+  }
+
+  return getBestSellersBooks(limit);
+}
+
+export async function getKidsBooks(limit = 20) {
+  const books = await readBooks(`/api/books?limit=${limit}&category=children&sort=soldCount:desc`);
+
+  if (books.length > 0) {
+    return books.slice(0, limit);
+  }
+
+  return getSchoolSuppliesBooks(limit);
+}

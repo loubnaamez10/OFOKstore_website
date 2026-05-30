@@ -31,6 +31,10 @@
   margin: 0 12px;
 }
 
+.navbar .nav-links[dir="rtl"] {
+  direction: rtl;
+}
+
 .nav-link {
   position: relative;
   display: inline-flex;
@@ -114,5 +118,23 @@
 .search-input::placeholder{ color:#777; }
 
 @media (max-width:720px){
-  .nav-links{ display:none; }
+  .navbar{
+    height:auto;
+    padding:10px 16px;
+    flex-wrap:wrap;
+  }
+
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    justify-content:center;
+    order:3;
+    width:100%;
+    margin:6px 0 0;
+  }
+
+  .nav-link{
+    font-size:14px;
+  }
 }
