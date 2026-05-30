@@ -306,7 +306,7 @@ export default function Home() {
               <p className="home-bestsellers__subtitle">{t.bestSellersSubtitle}</p>
             </div>
 
-            <Link className="home-bestsellers__view-all" to="/books">
+            <Link className="home-bestsellers__view-all" to="/our-bestsellers">
               {t.bestSellersViewAll}
             </Link>
           </div>

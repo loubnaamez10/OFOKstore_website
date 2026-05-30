@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLang } from "../context/LangContext";
 import BookCard from "../components/BookCard";
@@ -10,19 +9,16 @@ const COPY = {
     eyebrow: "Latest additions",
     title: "New Arrivals",
     subtitle: "The 20 newest books added to our collection.",
-    back: "Back to home",
   },
   fr: {
     eyebrow: "Derniers ajouts",
     title: "Nouveautés",
     subtitle: "Les derniers livres ajoutés à notre collection.",
-    back: "Retour à l'accueil",
   },
   ar: {
     eyebrow: "أحدث الإضافات",
     title: "وصل حديثاً",
     subtitle: "أحدث 20 كتاباً تمت إضافتها إلى مجموعتنا.",
-    back: "العودة إلى الصفحة الرئيسية",
   },
 };
 
@@ -52,9 +48,6 @@ export default function NewArrivals() {
           <h1 className="new-arrivals__title">{t.title}</h1>
           <p className="new-arrivals__subtitle">{t.subtitle}</p>
         </div>
-        <Link className="new-arrivals__back" to="/">
-          {t.back}
-        </Link>
       </div>
 
       <div className="new-arrivals__grid" aria-label={t.title}>

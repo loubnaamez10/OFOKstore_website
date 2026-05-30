@@ -19,7 +19,7 @@ export default function Navbar() {
   const navText = {
     home: lang === "fr" ? "Accueil" : lang === "ar" ? "الرئيسية" : "Home",
     newArrivals: lang === "fr" ? "Nouveautés" : lang === "ar" ? "وصل حديثاً" : "New Arrivals",
-    bestsellers: lang === "fr" ? "Bestsellers" : lang === "ar" ? "الأكثر مبيعًا" : "Bestsellers",
+    bestsellers: lang === "fr" ? "Nos meilleures ventes" : lang === "ar" ? "الأكثر مبيعًا" : "Our Bestsellers",
   };
 
   function changeLang(code) {
