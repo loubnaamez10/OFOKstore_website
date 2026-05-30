@@ -5,6 +5,94 @@ import { useLang } from "../context/LangContext";
 import BookCard from "../components/BookCard";
 import { getLatestBooks } from "../services/books";
 
+const SOCIAL_CONTACTS = {
+  instagramLabel: "@ofokstore",
+  instagramUrl: "https://www.instagram.com/ofokstore/",
+  whatsappLabel: "+213 000 000 000",
+  whatsappUrl: "https://wa.me/213000000000",
+};
+
+const TRUST_ITEMS = {
+  en: {
+    intro: "Why OFOK ?",
+    introSubtitle: "OFOK — Where every book opens a new horizon.",
+    eyebrow: "Why shop with us",
+    title: "Built for trust and support",
+    cards: [
+      {
+        key: "payment",
+        icon: "payment",
+        title: "Secure Payment",
+        subtitle: "100% secure checkout",
+      },
+      {
+        key: "returns",
+        icon: "returns",
+        title: "Easy Returns",
+        subtitle: "7 days return policy",
+      },
+      {
+        key: "support",
+        icon: "support",
+        title: "Customer Support",
+        subtitle: "We’re here to help",
+      },
+    ],
+  },
+  fr: {
+    intro: "Pourquoi OFOK ?",
+    introSubtitle: "OFOK — Là où chaque livre ouvre un nouvel horizon.",
+    eyebrow: "Pourquoi nous choisir",
+    title: "Pensé pour la confiance et l’accompagnement",
+    cards: [
+      {
+        key: "payment",
+        icon: "payment",
+        title: "Paiement sécurisé",
+        subtitle: "Paiement 100 % sécurisé",
+      },
+      {
+        key: "returns",
+        icon: "returns",
+        title: "Retours faciles",
+        subtitle: "Politique de retour sous 7 jours",
+      },
+      {
+        key: "support",
+        icon: "support",
+        title: "Support client",
+        subtitle: "Nous sommes là pour vous aider",
+      },
+    ],
+  },
+  ar: {
+    intro: "لماذا أُفُق ؟",
+    introSubtitle: "أُفُق — حيث يفتح كل كتاب أفقًا جديدًا.",
+    eyebrow: "لماذا تتسوق معنا",
+    title: "مصممة للثقة والدعم",
+    cards: [
+      {
+        key: "payment",
+        icon: "payment",
+        title: "دفع آمن",
+        subtitle: "دفع آمن بنسبة 100٪",
+      },
+      {
+        key: "returns",
+        icon: "returns",
+        title: "إرجاع سهل",
+        subtitle: "سياسة إرجاع لمدة 7 يوماً",
+      },
+      {
+        key: "support",
+        icon: "support",
+        title: "دعم العملاء",
+        subtitle: "نحن هنا لمساعدتك",
+      },
+    ],
+  },
+};
+
 const HERO_TEXT = {
   en: {
     eyebrow: "Delivery Available To 69 Provinces In Algeria 🇩🇿.",
@@ -75,6 +163,7 @@ const HERO_TEXT = {
 export default function Home() {
   const { lang } = useLang();
   const t = HERO_TEXT[lang] || HERO_TEXT.en;
+  const trust = TRUST_ITEMS[lang] || TRUST_ITEMS.en;
   const [latestBooks, setLatestBooks] = useState([]);
 
   useEffect(() => {
@@ -168,6 +257,63 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="home-trust" aria-labelledby="home-trust-title" dir={lang === "ar" ? "rtl" : "ltr"}>
+        <div className="home-trust__inner">
+          <div className="home-trust__intro">
+            <p className="home-trust__intro-title">{trust.intro}</p>
+            <p className="home-trust__intro-subtitle">{trust.introSubtitle}</p>
+          </div>
+
+          <div className="home-trust__bar" aria-labelledby="home-trust-title">
+            <h2 id="home-trust-title" className="home-trust__sr-only">
+              {trust.title}
+            </h2>
+
+            {trust.cards.map((card) =>
+              <article key={card.key} className="home-trust__item">
+                <span className="home-trust__icon" aria-hidden="true">
+                  <TrustIcon type={card.icon} />
+                </span>
+                <div className="home-trust__card-copy">
+                  <h3 className="home-trust__card-title">{card.title}</h3>
+                  <p className="home-trust__card-subtitle">{card.subtitle}</p>
+                </div>
+              </article>
+            )}
+          </div>
+        </div>
+      </section>
     </>
+  );
+}
+
+function TrustIcon({ type }) {
+  if (type === "payment") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 17.25V6.75Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M4.5 9.75h15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M8.25 15.75h2.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === "returns") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7.5 8.25h8.25c2.071 0 3.75 1.679 3.75 3.75s-1.679 3.75-3.75 3.75h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9.75 13.5 7.5 15.75 9.75 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16.5 15.75H8.25c-2.071 0-3.75-1.679-3.75-3.75s1.679-3.75 3.75-3.75h6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M14.25 10.5 16.5 8.25 14.25 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4.5a7.5 7.5 0 0 1 7.5 7.5c0 1.79-.63 3.43-1.69 4.72l.74 2.78-2.84-.76A7.48 7.48 0 0 1 12 19.5c-4.14 0-7.5-3.36-7.5-7.5S7.86 4.5 12 4.5Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M9.15 10.5c.18-.42.45-.6.78-.6.48 0 .75.3 1.05.93.3.63.57 1.12 1.08 1.12.42 0 .8-.25 1.2-.74" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
   );
 }
