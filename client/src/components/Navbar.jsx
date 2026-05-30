@@ -11,18 +11,27 @@ export default function Navbar() {
   const { cart } = useCart();
   const location = useLocation();
   const [langOpen, setLangOpen] = useState(false);
+  const [booksOpen, setBooksOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef(null);
+  const booksRef = useRef(null);
   const navigate = useNavigate();
 
   const navText = {
     home: lang === "fr" ? "Accueil" : lang === "ar" ? "الرئيسية" : "Home",
+    books: lang === "fr" ? "Livres" : lang === "ar" ? "الكتب" : "Books",
     newArrivals: lang === "fr" ? "Nouveautés" : lang === "ar" ? "أحدث المنتجات" : "New Arrivals",
     bestsellers: lang === "fr" ? "Nos meilleures ventes" : lang === "ar" ? "الأكثر مبيعًا" : "Our Bestsellers",
     schoolSupplies: lang === "fr" ? "Fournitures scolaires" : lang === "ar" ? "اللوازم المدرسية" : "School Supplies",
     kidsBooks: lang === "fr" ? "Livres pour enfants" : lang === "ar" ? "كتب الأطفال" : "Kids' Books",
   };
+
+  const booksMenuText = {
+    en: { english: "English", arabic: "Arabic", french: "French" },
+    fr: { english: "Anglais", arabic: "Arabe", french: "Français" },
+    ar: { english: "الإنجليزية", arabic: "العربية", french: "الفرنسية" },
+  }[lang] || { english: "English", arabic: "Arabic", french: "French" };
 
   function changeLang(code) {
     setLang(code);
@@ -32,6 +41,17 @@ export default function Navbar() {
   useEffect(() => {
     if (searchOpen && searchRef.current) searchRef.current.focus();
   }, [searchOpen]);
+
+  useEffect(() => {
+    function handlePointerDown(event) {
+      if (booksRef.current && !booksRef.current.contains(event.target)) {
+        setBooksOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
 
   function onSearchSubmit(e) {
     e.preventDefault();
@@ -58,6 +78,32 @@ export default function Navbar() {
         <Link className={location.pathname === "/" ? "nav-link nav-link--active" : "nav-link"} to="/#home-top">
           {navText.home}
         </Link>
+
+        <div className="books-dropdown" ref={booksRef}>
+          <button
+            type="button"
+            className="nav-link nav-link--button books-toggle"
+            aria-haspopup="menu"
+            aria-expanded={booksOpen}
+            onClick={() => setBooksOpen((open) => !open)}
+          >
+            {navText.books} <span aria-hidden="true" className="nav-link__chevron">▾</span>
+          </button>
+
+          {booksOpen && (
+            <div className="books-menu" role="menu" aria-label={navText.books}>
+              <Link className="books-menu__item" role="menuitem" to="/books?lang=en" onClick={() => setBooksOpen(false)}>
+                {booksMenuText.english}
+              </Link>
+              <Link className="books-menu__item" role="menuitem" to="/books?lang=ar" onClick={() => setBooksOpen(false)}>
+                {booksMenuText.arabic}
+              </Link>
+              <Link className="books-menu__item" role="menuitem" to="/books?lang=fr" onClick={() => setBooksOpen(false)}>
+                {booksMenuText.french}
+              </Link>
+            </div>
+          )}
+        </div>
 
         <Link className="nav-link" to="/#home-new-arrivals">
           {navText.newArrivals}

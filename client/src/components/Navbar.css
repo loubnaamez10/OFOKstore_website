@@ -80,6 +80,48 @@
   transform: translateY(1px);
 }
 
+.books-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.books-toggle {
+  appearance: none;
+  font: inherit;
+  color: var(--ofok-purple-2);
+  line-height: inherit;
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  padding: 6px 0;
+}
+
+.books-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  min-width: 150px;
+  border-radius: 10px;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  z-index: 1001;
+}
+
+.books-menu__item {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--ofok-purple-2);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.books-menu__item:hover {
+  background: #f6f6f8;
+}
+
 .navbar .brand{
   font-weight:800;
   font-size:20px;
@@ -101,9 +143,9 @@
 }
 
 .lang-dropdown{ position:relative; display:inline-block; }
-.lang-toggle{ margin-left:8px; background:transparent; color:var(--ofok-purple-2); border:1px solid rgba(105, 127, 176, 0.2); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
+.lang-toggle{ margin-left:8px; background:transparent; color:var(--ofok-purple-2); border:1px solid rgba(105, 127, 176, 0.2); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:500; }
 .lang-menu{ position:absolute; right:0; top:calc(100% + 8px); background:#fff; color:#222; min-width:140px; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.18); overflow:hidden; z-index:1001; }
-.lang-menu button{ display:block; width:100%; padding:10px 12px; background:transparent; border:none; text-align:left; cursor:pointer; }
+.lang-menu button{ display:block; width:100%; padding:10px 12px; background:transparent; border:none; text-align:left; cursor:pointer; color:var(--ofok-purple-2); font: inherit; }
 .lang-menu button:hover{ background:#f6f6f8; }
 
 .cart-icon{ position:relative; display:inline-flex; align-items:center; justify-content:center; background:transparent; color:var(--ofok-purple-2); margin-right:12px; text-decoration:none; padding:6px; border-radius:6px; transform: translateY(6px); }
@@ -136,5 +178,10 @@
 
   .nav-link{
     font-size:14px;
+  }
+
+  .books-menu {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
