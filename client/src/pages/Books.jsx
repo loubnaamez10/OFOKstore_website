@@ -17,6 +17,8 @@ const PAGE_COPY = {
     addToCart: "Add to cart",
     viewMore: "View more about",
     categoriesAriaLabel: "Books categories",
+    searchLabel: "Search books",
+    searchPlaceholder: "Search by title or author",
     loading: "Loading English books...",
     empty: "Add English books to your database and they will appear here.",
   },
@@ -32,6 +34,8 @@ const PAGE_COPY = {
     addToCart: "Ajouter au panier",
     viewMore: "Voir plus",
     categoriesAriaLabel: "Categories des livres",
+    searchLabel: "Rechercher des livres",
+    searchPlaceholder: "Rechercher par titre ou auteur",
     loading: "Chargement des livres en français...",
     empty: "Ajoutez des livres en français dans la base pour les voir ici.",
   },
@@ -47,6 +51,8 @@ const PAGE_COPY = {
     addToCart: "أضف إلى السلة",
     viewMore: "عرض المزيد",
     categoriesAriaLabel: "فئات الكتب",
+    searchLabel: "ابحث عن كتاب",
+    searchPlaceholder: "ابحث بالعنوان أو الكاتب",
     loading: "جاري تحميل الكتب العربية...",
     empty: "أضف الكتب العربية في قاعدة البيانات لتظهر هنا.",
   },
@@ -243,6 +249,19 @@ export default function Books() {
     setSearchParams(nextParams);
   }
 
+  function onSearchChange(event) {
+    const nextValue = event.target.value;
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (nextValue.trim()) {
+      nextParams.set("search", nextValue);
+    } else {
+      nextParams.delete("search");
+    }
+
+    setSearchParams(nextParams);
+  }
+
   const direction = lang === "ar" ? "rtl" : "ltr";
 
   return (
@@ -261,6 +280,23 @@ export default function Books() {
       </header>
 
       <div className="books-page__toolbar">
+        <label className="books-page__search" aria-label={copy.searchLabel}>
+          <span className="books-page__search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M15.8 15.8L20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </span>
+          <input
+            className="books-page__search-input"
+            type="search"
+            value={searchQuery}
+            onChange={onSearchChange}
+            placeholder={copy.searchPlaceholder}
+            aria-label={copy.searchLabel}
+          />
+        </label>
+
         <div className="books-page__categories" role="tablist" aria-label={copy.categoriesAriaLabel}>
           {bubbles.map((item) => {
             const isActive = bubbleCategory === item.key;
@@ -286,7 +322,9 @@ export default function Books() {
           })}
         </div>
 
-        <p className="books-page__toolbar-copy">{`${visibleBooks.length} ${copy.booksShownLabel}`}</p>
+        {visibleBooks.length > 0 ? (
+          <p className="books-page__toolbar-copy">{`${visibleBooks.length} ${copy.booksShownLabel}`}</p>
+        ) : null}
       </div>
 
       <div className="books-page__grid" aria-label={pageTitle}>
