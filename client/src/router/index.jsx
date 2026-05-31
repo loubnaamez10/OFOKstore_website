@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Books from "../pages/Books";
 import NewArrivals from "../pages/NewArrivals";
 import OurBestsellers from "../pages/OurBestsellers";
+import SchoolSupplies from "../pages/SchoolSupplies";
+import KidsBooks from "../pages/KidsBooks";
 import BookDetails from "../pages/BookDetails";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
@@ -22,6 +24,8 @@ export const router = createBrowserRouter([
       { path: "books", element: <Books /> },
       { path: "new-arrivals", element: <NewArrivals /> },
       { path: "our-bestsellers", element: <OurBestsellers /> },
+      { path: "school-supplies", element: <SchoolSupplies /> },
+      { path: "kids-books", element: <KidsBooks /> },
       { path: "books/:id", element: <BookDetails /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <Checkout /> },

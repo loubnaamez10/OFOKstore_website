@@ -381,7 +381,7 @@ export default function Home() {
               <p className="home-school-supplies__subtitle">{t.schoolSuppliesSubtitle}</p>
             </div>
 
-            <Link className="home-school-supplies__view-all" to="/books?category=school-supplies">
+            <Link className="home-school-supplies__view-all" to="/school-supplies">
               {t.schoolSuppliesViewAll}
             </Link>
           </div>
@@ -408,7 +408,7 @@ export default function Home() {
               <p className="home-kids-books__subtitle">{t.kidsBooksSubtitle}</p>
             </div>
 
-            <Link className="home-kids-books__view-all" to="/books?category=children">
+            <Link className="home-kids-books__view-all" to="/kids-books">
               {t.kidsBooksViewAll}
             </Link>
           </div>
