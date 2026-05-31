@@ -110,7 +110,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="brand">
         <img src={logo} alt="OFOK logo" className="brand-logo" />
-        <span className="brand-text">OFOK</span>
+          <span className="brand-text">OFOK</span>
       </div>
 
       <div
