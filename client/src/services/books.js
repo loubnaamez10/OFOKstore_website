@@ -27,6 +27,53 @@ async function readBooks(path) {
   }
 }
 
+function normalizeLanguageCode(value) {
+  const normalized = String(value || "").trim().toLowerCase();
+
+  if (!normalized) {
+    return "";
+  }
+
+  if (normalized.startsWith("en") || normalized.includes("english") || normalized === "anglais") {
+    return "en";
+  }
+
+  if (normalized.startsWith("fr") || normalized.includes("french") || normalized.includes("franc")) {
+    return "fr";
+  }
+
+  if (normalized.startsWith("ar") || normalized.includes("arab")) {
+    return "ar";
+  }
+
+  return normalized;
+}
+
+function pickBookLanguage(book) {
+  if (!book || typeof book !== "object") {
+    return "";
+  }
+
+  const languageSources = [
+    book.lang,
+    book.language,
+    book.languageCode,
+    book.bookLanguage,
+    book.locale,
+  ];
+
+  const match = languageSources.find((value) => typeof value === "string" && value.trim());
+  return normalizeLanguageCode(match);
+}
+
+export async function getBooksByLanguage(language = "en", limit = 40) {
+  const normalizedLanguage = normalizeLanguageCode(language) || "en";
+  const books = await readBooks(`/api/books?limit=${limit}&sort=addedAt:desc`);
+
+  const filtered = books.filter((book) => pickBookLanguage(book) === normalizedLanguage);
+  return filtered.slice(0, limit);
+}
+
 export async function getLatestBooks(limit = 20) {
   const books = await readBooks(`/api/books?limit=${limit}&sort=addedAt:desc`);
   return books.slice(0, limit);

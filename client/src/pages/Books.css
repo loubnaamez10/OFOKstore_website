@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+.books-page {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* background pseudo-element removed per user request */
+
+.books-page__hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.8fr);
+  gap: 20px;
+  padding: 12px 4px 22px;
+  border-bottom: 1px solid rgba(105, 127, 176, 0.16);
+  background: transparent;
+}
+
+.books-page__hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.books-page__eyebrow {
+  margin: 0 0 10px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(90, 111, 157, 0.86);
+}
+
+.books-page__title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(36px, 4.8vw, 58px);
+  line-height: 1.02;
+  color: #20376d;
+}
+
+.books-page__subtitle {
+  margin-top: 14px;
+  max-width: 56ch;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(90, 111, 157, 0.9);
+}
+
+.books-page__hero-badge {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  justify-self: end;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(109, 134, 207, 0.09);
+  border: 1px solid rgba(109, 134, 207, 0.16);
+  color: #20376d;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.books-page__hero-stats {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.books-page__stat {
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(105, 127, 176, 0.12);
+  box-shadow: 0 10px 26px rgba(105, 127, 176, 0.08);
+}
+
+.books-page__stat-value {
+  display: block;
+  margin-bottom: 6px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  color: #20376d;
+}
+
+.books-page__stat-label {
+  display: block;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(90, 111, 157, 0.82);
+}
+
+.books-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px;
+}
+
+/* search removed per user request */
+
+.books-page__categories {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+  scrollbar-width: thin;
+}
+
+.books-page__category-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(119, 137, 174, 0.2);
+  border-radius: 999px;
+  background: #fff;
+  color: #2f4572;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.books-page__category-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(64, 87, 136, 0.35);
+  box-shadow: 0 8px 18px rgba(81, 101, 146, 0.14);
+}
+
+.books-page__category-pill.is-active {
+  color: #fff;
+  border-color: #1e3570;
+  background: linear-gradient(135deg, #203e86 0%, #192b5b 100%);
+  box-shadow: 0 10px 20px rgba(28, 50, 96, 0.24);
+}
+
+.books-page__category-pill-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.books-page__category-pill-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.books-page__category-pill:not(.is-active) .books-page__category-pill-icon path {
+  opacity: 0;
+}
+
+.books-page__toolbar-copy {
+  flex: 0 0 auto;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(90, 111, 157, 0.86);
+}
+
+.books-page__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.books-page__card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 248, 252, 0.98) 100%);
+  border: 1px solid rgba(105, 127, 176, 0.1);
+  box-shadow: 0 14px 30px rgba(105, 127, 176, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.books-page__card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(105, 127, 176, 0.2);
+  box-shadow: 0 22px 42px rgba(105, 127, 176, 0.16);
+}
+
+.books-page__cover-wrap {
+  aspect-ratio: 7 / 10;
+  background: #e9edf6;
+}
+
+.books-page__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.books-page__cover--placeholder {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(109, 134, 207, 0.2) 0%, rgba(109, 134, 207, 0) 36%),
+    linear-gradient(160deg, #eef1f8 0%, #dfe6f3 100%);
+}
+
+.books-page__cover-mark {
+  min-width: 78px;
+  min-height: 78px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #6d86cf;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.books-page__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  text-align: left;
+  flex: 1;
+}
+
+.books-page[dir="rtl"] .books-page__body {
+  text-align: right;
+}
+
+.books-page__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.books-page__book-title {
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 800;
+  color: #20376d;
+  min-height: 3.2em;
+}
+
+.books-page__price {
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ofok-purple-2, #4c67b1);
+}
+
+.books-page__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.books-page__view-more,
+.books-page__add-to-cart {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.books-page__view-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #29406e;
+  border: 1px solid rgba(105, 127, 176, 0.18);
+  background: #eef2fb;
+}
+
+.books-page__add-to-cart {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #274c9b 0%, #20376d 100%);
+  cursor: pointer;
+}
+
+.books-page__view-more:hover,
+.books-page__add-to-cart:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(105, 127, 176, 0.16);
+}
+
+.books-page__view-more:focus-visible,
+.books-page__add-to-cart:focus-visible {
+  outline: 3px solid rgba(109, 134, 207, 0.28);
+  outline-offset: 3px;
+}
+
+.books-page__empty {
+  grid-column: 1 / -1;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px dashed rgba(105, 127, 176, 0.22);
+  background: linear-gradient(180deg, rgba(246, 247, 250, 0.9) 0%, rgba(236, 240, 248, 0.95) 100%);
+  color: rgba(90, 111, 157, 0.84);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .books-page__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .books-page__hero-badge {
+    justify-self: start;
+  }
+
+  .books-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .books-page__hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .books-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .books-page__toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .books-page__toolbar-copy {
+    padding-left: 4px;
+  }
+}
+
+@media (max-width: 560px) {
+  .books-page__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .books-page__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .books-page__view-more,
+  .books-page__add-to-cart {
+    width: 100%;
+  }
+}
